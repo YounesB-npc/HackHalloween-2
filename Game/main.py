@@ -182,4 +182,5 @@ while True:
     screen.blit(rotated_wave, (player_x, player_y))
 
     pygame.display.flip()
-    clock.tick(60)
+
+    clock.tick(144)
