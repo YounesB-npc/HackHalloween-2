@@ -5,17 +5,13 @@ import math
 
 pygame.init()
 
-# ==========================
-#WINDOW SETUP
-# ==========================
+#WINDOW SETUP-------------------------------------
 WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Wave Challenge")
 clock = pygame.time.Clock()
 
-# ==========================
-#DEFAULT SETTINGS
-# ==========================
+#DEFAULT SETTINGS-------------------------------------
 default_speed = 5
 default_corridor = 200
 default_wave_angle = 45
@@ -24,9 +20,7 @@ terrain_speed = default_speed
 corridor_height = default_corridor
 wave_angle_max = default_wave_angle
 
-# ==========================
-#PLAYER SETUP
-# ==========================
+#PLAYER SETUP-------------------------------------
 wave_img = pygame.image.load("assets/wave_17.png").convert_alpha()
 wave_img = pygame.transform.scale(wave_img, (30, 30))
 
@@ -38,14 +32,12 @@ space_held = False
 trail = []
 trail_length = 40
 
-# ==========================
-#TERRAIN SETUP
-# ==========================
+#TERRAIN SETUP-------------------------------------
 segment_width = 60
 floor_points = []
 ceiling_points = []
 
-# Initialize terrain points
+#Initialize terrain points
 for i in range(WIDTH // segment_width + 2):
     x_pos = i * segment_width
     y_floor = random.randint(HEIGHT - 150, HEIGHT - 50)
@@ -60,9 +52,7 @@ def generate_new_point(last_x, is_floor=True):
         new_y = random.randint(50, HEIGHT - corridor_height - 150)
     return (last_x + segment_width, new_y)
 
-# ==========================
-#MAIN GAME LOOP
-# ==========================
+#MAIN GAME LOOP-------------------------------------
 while True:
     # Event handling
     for event in pygame.event.get():
@@ -98,7 +88,7 @@ while True:
     else:
         player_y += wave_speed_y
 
-    # Keep inside screen
+    #Keep player inside screen
     player_y = max(0, min(HEIGHT - wave_img.get_height(), player_y))
 
     #Drawing
@@ -111,8 +101,9 @@ while True:
 
     #Compute trail offset based on current wave angle
     angle_rad = math.radians(wave_angle_max if space_held else -wave_angle_max)
-    offset_x = math.cos(angle_rad) * 5  # distance from center
-    offset_y = -math.sin(angle_rad) * 5  # negative because y-axis goes down
+    #Distance from center
+    offset_x = math.cos(angle_rad) * 5  
+    offset_y = -math.sin(angle_rad) * 5
 
     #Add new trail point at the tip of the wave
     trail.append((
@@ -183,4 +174,5 @@ while True:
 
     pygame.display.flip()
 
-    clock.tick(144)
+    clock.tick(60)
+
