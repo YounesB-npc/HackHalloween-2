@@ -94,12 +94,12 @@ while True:
     #Drawing
     screen.fill((0, 0, 0))
 
-    #Move existing trail left along with terrain
+    #Move trail +  terrain left
     trail = [(tx - terrain_speed, ty) for (tx, ty) in trail]
     if len(trail) > trail_length:
         trail.pop(0)
 
-    #Compute trail offset based on current wave angle
+    #Calculate the trail offset based on current wave angle
     angle_rad = math.radians(wave_angle_max if space_held else -wave_angle_max)
     #Distance from center
     offset_x = math.cos(angle_rad) * 5  
@@ -175,4 +175,5 @@ while True:
     pygame.display.flip()
 
     clock.tick(60)
+
 
