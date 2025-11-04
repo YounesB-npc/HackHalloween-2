@@ -54,7 +54,7 @@ def generate_new_point(last_x, is_floor=True):
 
 #MAIN GAME LOOP-------------------------------------
 while True:
-    # Event handling
+    #Event handling
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -175,5 +175,6 @@ while True:
     pygame.display.flip()
 
     clock.tick(60)
+
 
 
